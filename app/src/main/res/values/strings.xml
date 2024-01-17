@@ -5,4 +5,6 @@
     <string name="nav_header_title">Белробототехника</string>
     <string name="nav_header_subtitle">icleborobot@tut.by</string>
     <string name="nav_header_description">Navigation Image header</string>
+
+    <string name="menu_icleborobot_aksessuary">Запчасти</string>
 </resources>
