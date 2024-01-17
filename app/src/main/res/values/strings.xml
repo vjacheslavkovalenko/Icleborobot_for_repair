@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Icleborobot-продажа и ремонт роботов</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="nav_header_title">Белробототехника</string>
+    <string name="nav_header_subtitle">icleborobot@tut.by</string>
+    <string name="nav_header_description">Navigation Image header</string>
+</resources>
