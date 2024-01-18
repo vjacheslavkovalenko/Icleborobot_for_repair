@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.icleborobot_for_repair.MainFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_siteFragment"
+            app:destination="@id/menu_site" />
+        <action
+            android:id="@+id/action_mainFragment_to_ContactsFragment"
+            app:destination="@id/contacts" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu_site"
+        android:name="com.example.icleborobot_for_repair.SiteFragment"
+        android:label="site"
+        tools:layout="@layout/fragment_site" />
+    <fragment
+        android:id="@+id/contacts"
+        android:name="com.example.icleborobot_for_repair.ContactsFragment"
+        android:label="contacts"
+        tools:layout="@layout/fragment_contacts" />
+</navigation>
