@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_container">#80BEB2D6</color>
     <color name="iclebo_color">#97a7bd</color>
+    <color name="red">#F44336</color>
 </resources>

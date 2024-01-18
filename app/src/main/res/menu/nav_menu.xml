@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/firstItem"
-        android:title="First Item"/>
-    <item
-        android:id="@+id/secondItem"
-        android:title="Second Item"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
     <item
-        android:id="@+id/icleborobot_aksessuary"
-        android:title="@string/menu_icleborobot_aksessuary"
-        android:icon="@mipmap/ic_launcher_round"/>
+        android:id="@+id/mainFragment"
+        android:title="@string/menu_main"
+        android:icon="@drawable/ic_home_black_48"/>
+    <item
+        android:id="@+id/menu_site"
+        android:title="@string/menu_site"
+        android:icon="@drawable/ic_shopping_cart_black_48"/>
 
     <item
-        android:id="@+id/thirdItem"
-        android:title="Third Item"/>
+        android:id="@+id/repair"
+        android:title="@string/menu_repair"
+        android:icon="@drawable/ic_build_black_48"/>
+
+    <item
+        android:id="@+id/contacts"
+        android:title="@string/menu_contacts"
+        android:icon="@drawable/ic_place_black_48"/>
+<!--    <item-->
+<!--        android:id="@+id/working_time"-->
+<!--        android:title="@string/menu_working_time"-->
+<!--        android:icon=""/>-->
 </menu>

@@ -1,10 +1,19 @@
 <resources>
-    <string name="app_name">Icleborobot-продажа и ремонт роботов</string>
+    <string name="app_name">ООО \"Белробототехника\"</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="nav_header_title">Белробототехника</string>
     <string name="nav_header_subtitle">icleborobot@tut.by</string>
     <string name="nav_header_description">Navigation Image header</string>
 
-    <string name="menu_icleborobot_aksessuary">Запчасти</string>
+    <string name="menu_main">Главная</string>
+    <string name="menu_site">Сайт</string>
+    <string name="menu_repair">Ремонт</string>
+    <string name="menu_contacts">Контакты</string>
+    <string name="menu_working_time">Время работы</string>
+
+    <string name="check_connection_text">Интернет-соединение отсутствует</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="text_for_third_fragment">Третий тестовый фрагмент!!!</string>
 </resources>

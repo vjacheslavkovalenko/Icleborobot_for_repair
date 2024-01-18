@@ -2,20 +2,28 @@ package com.example.icleborobot_for_repair
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.MenuItem
-import android.webkit.WebViewClient
+import android.view.KeyEvent
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.icleborobot_for_repair.databinding.ActivityMainBinding
-import com.example.icleborobot_for_repair.databinding.ContentSiteBinding
+import com.example.icleborobot_for_repair.databinding.FragmentSiteBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var conf: AppBarConfiguration
+    private lateinit var navController: NavController
     lateinit var binding: ActivityMainBinding
-    lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var binding_site: ContentSiteBinding
+    private lateinit var binding_site: FragmentSiteBinding
+    private lateinit var dialog : AlertDialog
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,51 +33,85 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding_site = ContentSiteBinding.inflate(layoutInflater)
+        dialog = MaterialAlertDialogBuilder(this , R.style.MaterialAlertDialog_Rounded)
+            .setView(R.layout.internet_dialog)
+            .setCancelable(false)
+            .create()
 
-        binding.xmlWebView.settings.javaScriptEnabled=true
-        binding.xmlWebView.webViewClient = WebViewClient()
-        binding_site.siteWebView.settings.javaScriptEnabled=true
-        binding_site.siteWebView.webViewClient = WebViewClient()
+        val networkManager = NetworkManager(this)
+        networkManager.observe(this){
 
-        binding.apply {
-            toggle = ActionBarDrawerToggle(this@MainActivity, drawerLayout, R.string.open, R.string.close)
-            drawerLayout.addDrawerListener(toggle)
-            toggle.syncState()
-
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-            navView.setNavigationItemSelectedListener {
-                binding.drawerLayout.closeDrawers()
-                when(it.itemId){
-                    R.id.firstItem->{
-                        Toast.makeText(this@MainActivity, "First Item Clicked", Toast.LENGTH_SHORT).show()
-                    }
-                    R.id.secondItem->{
-                        Toast.makeText(this@MainActivity, "Second Item Clicked", Toast.LENGTH_SHORT).show()
-                    }
-
-                    R.id.icleborobot_aksessuary -> {
-                        binding_site.siteWebView.loadUrl("https://icleborobot.by/product-category/aksessuary/")
-                        setContentView(binding_site.root)
-                        Toast.makeText(this@MainActivity, "Выбрано \"Запчасти\"", Toast.LENGTH_SHORT).show()
-                        //return true
-                    }
-
-                    R.id.thirdItem->{
-                        Toast.makeText(this@MainActivity, "Third Item Clicked", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                true
+            if (!it){
+                if (!dialog.isShowing)
+                    dialog.show()
+            }else{
+                if (dialog.isShowing)
+                    dialog.hide()
             }
         }
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)){
+
+        setSupportActionBar(binding.contentNavToolbar.toolbar)
+        navController = findNavController(R.id.fragmentContainerView)
+        conf = AppBarConfiguration(
+            setOf(
+                R.id.mainFragment,
+                R.id.menu_site,
+                R.id.repair,
+                R.id.contacts
+            ), binding.drawerLayout
+        )
+        setupActionBarWithNavController(navController, conf)
+        binding.navView.setupWithNavController(navController)
+//        binding.xmlWebView.settings.javaScriptEnabled=true
+//        binding.xmlWebView.webViewClient = WebViewClient()
+
+//        binding_site = FragmentSiteBinding.inflate(layoutInflater)
+//
+//        binding_site.siteWebView.settings.javaScriptEnabled=true
+//        binding_site.siteWebView.webViewClient = WebViewClient()
+
+        binding.navView.setNavigationItemSelectedListener {
+            binding.drawerLayout.closeDrawers()
+            when(it.itemId){
+                R.id.mainFragment->{
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, MainFragment()).commit()
+                    Toast.makeText(this@MainActivity, "Выбрано \"Главная\"", Toast.LENGTH_SHORT).show()
+                }
+                R.id.menu_site->{
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, SiteFragment()).commit()
+                    Toast.makeText(this@MainActivity, "Выбран \"Сайт\"", Toast.LENGTH_SHORT).show()
+                }
+
+                R.id.repair -> {
+
+                    Toast.makeText(this@MainActivity, "Выбрано \"Ремонт\"", Toast.LENGTH_SHORT).show()
+                }
+
+                R.id.contacts->{
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, ContactsFragment()).commit()
+                    Toast.makeText(this@MainActivity, "Third Item Clicked", Toast.LENGTH_SHORT).show()
+                }
+            }
             true
         }
-        return super.onOptionsItemSelected(item)
     }
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(conf) || super.onSupportNavigateUp()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        // Check whether the key event is the Back button and if there's history.
+        if (keyCode == KeyEvent.KEYCODE_BACK && binding_site.siteWebView.canGoBack()) {
+            binding_site.siteWebView.goBack()
+            return true
+        }
+        // If it isn't the Back button or there isn't web page history, bubble up to
+        // the default system behavior. Probably exit the activity.
+        return super.onKeyDown(keyCode, event)
+    }
+
 
 }

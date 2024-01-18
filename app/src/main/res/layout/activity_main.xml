@@ -5,19 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     android:id="@+id/drawerLayout"
     tools:context=".MainActivity">
 
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/xml_web_view"/>
-
     <include
-        android:id="@+id/content_main_from_menu"
-        layout="@layout/content_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/content_nav_toolbar"
+        layout="@layout/nav_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
