@@ -9,6 +9,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/constraintlayout_fragment_main"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
@@ -41,7 +42,8 @@
                 android:layout_marginTop="50dp"
                 android:height="200dp"
                 android:width="400dp"
-                android:text="Перейти на сайт">
+                android:text="Перейти на сайт"
+                android:id="@+id/button_to_site">
 
             </Button>
 
@@ -51,7 +53,8 @@
                 android:layout_marginTop="50dp"
                 android:height="200dp"
                 android:width="400dp"
-                android:text="Узнать статус ремонта робота">
+                android:text="Узнать статус ремонта робота"
+                android:id="@+id/button_to_repair">
 
             </Button>
 
